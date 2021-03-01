@@ -59,14 +59,11 @@ def lambda_handler(event, context):
         if total_connection_count == 0:
             unused_instances.append(instance['DBInstanceIdentifier'])
 
-
+    # return str(unused_instances)
     """Publish all unused RDS instances to SNS topic"""
     sns_client = boto3.client('sns', region_name=REGION)
     sns_client.publish(
-        TopicArn='TOPIC ARN HERE',
+        TopicArn='arn:aws:sns:eu-west-2:119078770656:test',
         Message=str(unused_instances),
         Subject='Unused RDS instances',
     )
-
-
-
